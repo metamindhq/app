@@ -59,7 +59,7 @@ function AppointmentCard(props) {
   if (!doctor) return null;
 
   return (
-    <View style={{ width: "100%", marginBottom: 12 }}>
+    <View style={{ width: "100%" }}>
       <Swipeout
         style={{
           backgroundColor: "transparent",
@@ -128,8 +128,8 @@ function AppointmentCard(props) {
               }}
             >
               Scheduled for{" "}
-              {dayjs(props.date_time + "Z").format("dddd, MMMM D, YYYY")} at{" "}
-              {dayjs(props.date_time + "Z").format("h:mm A")}
+              {dayjs(props.date_time).format("dddd, MMMM D, YYYY")} at{" "}
+              {dayjs(props.date_time).format("h:mm A")}
             </Text>
           </View>
         </View>

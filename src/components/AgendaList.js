@@ -8,9 +8,11 @@ export default function AgendaList(props) {
   useEffect(() => {
     const sortedArray = props.list.sort(
       (a, b) =>
-        new Date(a.reminder_timestamp).getTime() -
-        new Date(b.reminder_timestamp).getTime()
+        new Date(a?.[props.timeProp]).getTime() -
+        new Date(b?.[props.timeProp]).getTime()
     );
+
+    console.log(sortedArray);
 
     const groups = {};
     for (const item of sortedArray) {
@@ -48,7 +50,7 @@ export default function AgendaList(props) {
       {Object.keys(agenda).map((date, index) => (
         <View
           style={{
-            marginBottom: 12,
+            marginBottom: 24,
           }}
           key={`date-${index}`}
         >
@@ -69,13 +71,28 @@ export default function AgendaList(props) {
                   alignItems: "center",
                   gap: 8,
                   overflow: "hidden",
-                  paddingVertical: 12,
+                  paddingVertical: 14,
                 }}
               >
-                <Text>{hour}:00</Text>
-                <Text>
+                <Text
+                  style={{
+                    fontFamily: "Gilroy-SemiBold",
+                    fontSize: 14,
+                    color: "#4C4C4C",
+                  }}
+                >
+                  {hour < 10 && "0"}
+                  {hour}:00
+                </Text>
+                <Text
+                  style={{
+                    fontFamily: "Gilroy-SemiBold",
+                    fontSize: 14,
+                    color: "#4C4C4C",
+                  }}
+                >
                   - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-                  - - -
+                  -
                 </Text>
               </View>
               <View
@@ -84,17 +101,18 @@ export default function AgendaList(props) {
                 }}
               >
                 {agenda[date][hour].map((agendaProps, index) => (
-                  <>
+                  <View key={agendaProps.id}>
                     {React.Children.map(props.children, (child) => {
                       return React.cloneElement(child, { ...agendaProps });
                     })}
-                  </>
+                  </View>
                 ))}
               </View>
             </View>
           ))}
         </View>
       ))}
+      <View style={{ height: 380 }}></View>
     </View>
   );
 }

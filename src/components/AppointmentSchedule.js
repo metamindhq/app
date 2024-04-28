@@ -11,7 +11,9 @@ function AppointmentSchedule(props) {
 
   const reloadData = () => {
     getMyAppointments().then((appointments) => {
-      const filteredAppointments = appointments.filter((e) => !e.attended);
+      const filteredAppointments = appointments
+        .filter((e) => !e.attended)
+        .map((e) => ({ ...e, date_time: e.date_time + "Z" }));
       setAppointments([...filteredAppointments]);
       setTimeout(() => {
         setRefreshing(false);
@@ -41,7 +43,7 @@ function AppointmentSchedule(props) {
         }
       >
         <AgendaList list={appointments} timeProp="date_time">
-          <AppointmentCard />
+          <AppointmentCard refreshAppointments={reloadData} />
         </AgendaList>
         {appointments.length === 0 && !refreshing && (
           <View>
