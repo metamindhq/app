@@ -78,14 +78,22 @@ function AppointmentCard(props) {
             gap: 6,
           }}
         >
-          <Image
+          <View
             style={{
-              width: 90,
-              height: 90,
+              backgroundColor: "#2AA6FF",
+              padding: 4,
               borderRadius: 20,
             }}
-            src="https://i.ibb.co/5WMT0Hx/flat-male-doctor-health-care-dentist-with-text-box-concept-148549-109.jpg"
-          />
+          >
+            <Image
+              style={{
+                width: 70,
+                height: 70,
+                borderRadius: 20,
+              }}
+              src="https://i.ibb.co/dr6rZwR/8179550.webp"
+            />
+          </View>
           <View
             style={{
               paddingVertical: 8,
@@ -105,7 +113,7 @@ function AppointmentCard(props) {
                 fontFamily: "Gilroy-Medium",
                 fontSize: 14,
                 color: "#4C4C4C",
-                paddingTop: 4,
+                paddingTop: 2,
               }}
             >
               {doctor.specialization}
@@ -115,6 +123,7 @@ function AppointmentCard(props) {
                 marginTop: "auto",
                 fontFamily: "Gilroy-Medium",
                 fontSize: 10,
+                paddingTop: 2,
                 color: "#4C4C4C",
               }}
             >

@@ -3,6 +3,7 @@ import { MaterialCommunityIcons } from "@expo/vector-icons";
 import dayjs from "dayjs";
 
 export default function MedicineReminderCard(props) {
+  console.log(props);
   return (
     <View
       style={{

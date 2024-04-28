@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import { getMyAppointments } from "../utils/appointments";
 import CreateAppointmentButton from "./CreateAppointmentButton";
 import AppointmentCard from "./AppointmentCard";
+import AgendaList from "./AgendaList";
 
 function AppointmentSchedule(props) {
   const [refreshing, setRefreshing] = useState(false);
@@ -39,13 +40,9 @@ function AppointmentSchedule(props) {
           <RefreshControl refreshing={refreshing} onRefresh={refresh} />
         }
       >
-        {appointments.map((appointment, index) => (
-          <AppointmentCard
-            key={appointment.id}
-            {...appointment}
-            refreshAppointments={reloadData}
-          />
-        ))}
+        <AgendaList list={appointments} timeProp="date_time">
+          <AppointmentCard />
+        </AgendaList>
         {appointments.length === 0 && !refreshing && (
           <View>
             <Text
