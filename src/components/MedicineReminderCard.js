@@ -1,13 +1,14 @@
-import { Button, Text, View } from "react-native";
+import { Button, Text, TouchableOpacity, View } from "react-native";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
+import dayjs from "dayjs";
 
 export default function MedicineReminderCard(props) {
   return (
     <View
       style={{
         backgroundColor: "#EEEEEE",
-        borderRadius: 12,
-        padding: 4,
+        borderRadius: 24,
+        padding: 6,
         flexDirection: "row",
         gap: 8,
       }}
@@ -15,13 +16,13 @@ export default function MedicineReminderCard(props) {
       <View
         style={{
           backgroundColor: "#4C4C4C",
-          paddingHorizontal: 24,
+          paddingHorizontal: 28,
           alignItems: "center",
           flexDirection: "row",
-          borderRadius: 10,
+          borderRadius: 22,
         }}
       >
-        <MaterialCommunityIcons name={props.icon} size={24} color="#ffffff" />
+        <MaterialCommunityIcons name="pill" size={24} color="#ffffff" />
       </View>
       <View style={{ paddingVertical: 6 }}>
         <Text
@@ -41,7 +42,7 @@ export default function MedicineReminderCard(props) {
             marginTop: 2,
           }}
         >
-          {props.dosage} • {props.prandial} • {props.quantity}
+          {props.quantity}
         </Text>
 
         <Text
@@ -52,12 +53,7 @@ export default function MedicineReminderCard(props) {
             marginTop: "auto",
           }}
         >
-          at {props.reminder.hour.toString().length === 1 && "0"}
-          {props.reminder.hour < 12
-            ? props.reminder.hour
-            : props.reminder.hour - 12}
-          :{props.reminder.minute.toString() / 10 == 0 && "0"}
-          {props.reminder.minute}
+          at {dayjs(props.reminder_timestamp).format("h:mmA")}
         </Text>
       </View>
       <View
@@ -67,25 +63,25 @@ export default function MedicineReminderCard(props) {
           padding: 4,
         }}
       >
-        <View
+        <TouchableOpacity
           style={{
             backgroundColor: "#2AA6FF",
             paddingHorizontal: 20,
             paddingVertical: 10,
-            borderRadius: 8,
+            borderRadius: 14,
           }}
         >
           <Text style={{ color: "#FFFFFF", fontSize: 12 }}>Taken</Text>
-        </View>
-        <View
+        </TouchableOpacity>
+        <TouchableOpacity
           style={{
             paddingHorizontal: 12,
             paddingVertical: 8,
-            borderRadius: 8,
+            borderRadius: 14,
           }}
         >
           <Text style={{ color: "#4C4C4C", fontSize: 12 }}>Skip</Text>
-        </View>
+        </TouchableOpacity>
       </View>
     </View>
   );

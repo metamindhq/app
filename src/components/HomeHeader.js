@@ -2,9 +2,19 @@ import { Text, View } from "react-native";
 import Avatar from "./Avatar";
 import { Feather } from "@expo/vector-icons";
 import ChatMessageView from "../views/ChatMessageView";
+import { getCurrentUser } from "../utils/user";
+import { useEffect, useState } from "react";
 
 export default function HomeHeader(props) {
   const { navigation, showChat, setShowChat } = props;
+
+  const [user, setUser] = useState();
+
+  useEffect(() => {
+    getCurrentUser().then((fetchedUser) => {
+      setUser(fetchedUser);
+    });
+  }, []);
 
   return (
     <View style={{ paddingHorizontal: 16 }}>
@@ -24,7 +34,7 @@ export default function HomeHeader(props) {
           }}
         >
           <Avatar
-            uri="https://i.ibb.co/mSYJL58/image.png"
+            uri="https://i.ibb.co/nbBnByY/3d-illustration-person-with-sunglasses-23-2149436188.jpg"
             height={50}
             width={50}
           />
@@ -49,7 +59,7 @@ export default function HomeHeader(props) {
                 fontFamily: "Gilroy-SemiBold",
               }}
             >
-              Jaagrav Seal
+              {user?.name}
             </Text>
           </View>
         </View>

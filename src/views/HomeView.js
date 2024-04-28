@@ -52,13 +52,18 @@ export default function HomeView(props) {
   ]);
   const [showChat, setShowChat] = useState(false);
 
-  const medicationSchedule = () => <MedicationSchedule {...props} />;
-  const appointmentSchedule = () => <AppointmentSchedule {...props} />;
+  const renderScene = ({ route }) => {
+    switch (route.key) {
+      case "medicationSchedule":
+        return <MedicationSchedule {...props} />;
 
-  const renderScene = SceneMap({
-    medicationSchedule,
-    appointmentSchedule,
-  });
+      case "appointmentSchedule":
+        return <AppointmentSchedule {...props} />;
+
+      default:
+        return null;
+    }
+  };
 
   useEffect(() => {
     Animated.timing(opacityAnim, {
@@ -92,6 +97,7 @@ export default function HomeView(props) {
         }}
       >
         <TabView
+          lazy
           navigationState={{ index, routes }}
           renderScene={renderScene}
           renderTabBar={renderTabBar}

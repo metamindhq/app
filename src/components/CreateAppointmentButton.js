@@ -1,5 +1,5 @@
 import { Feather } from "@expo/vector-icons";
-import { Text, TouchableOpacity, View } from "react-native";
+import { Platform, Text, TouchableOpacity, View } from "react-native";
 
 export default function CreateAppointmentButton(props) {
   const openCreateAppointmentView = () => {
@@ -17,7 +17,7 @@ export default function CreateAppointmentButton(props) {
         borderRadius: 22,
         position: "absolute",
         left: "50%",
-        bottom: 250,
+        bottom: Platform.OS === "android" ? 300 : 250,
         transform: [{ translateX: -32 }, { translateY: -32 }],
       }}
       onPress={openCreateAppointmentView}

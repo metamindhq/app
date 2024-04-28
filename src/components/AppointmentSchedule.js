@@ -4,7 +4,7 @@ import { getMyAppointments } from "../utils/appointments";
 import CreateAppointmentButton from "./CreateAppointmentButton";
 import AppointmentCard from "./AppointmentCard";
 
-export default function AppointmentSchedule(props) {
+function AppointmentSchedule(props) {
   const [refreshing, setRefreshing] = useState(false);
   const [appointments, setAppointments] = useState([]);
 
@@ -41,7 +41,7 @@ export default function AppointmentSchedule(props) {
       >
         {appointments.map((appointment, index) => (
           <AppointmentCard
-            key={`appointment-card-${appointment.id}`}
+            key={appointment.id}
             {...appointment}
             refreshAppointments={reloadData}
           />
@@ -65,3 +65,5 @@ export default function AppointmentSchedule(props) {
     </View>
   );
 }
+
+export default AppointmentSchedule;
