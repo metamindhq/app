@@ -1,8 +1,15 @@
 import { Text, View, TextInput, Pressable } from "react-native";
 import { Feather } from "@expo/vector-icons";
 import { TouchableOpacity } from "@gorhom/bottom-sheet";
+import { useState } from "react";
 
-export default function ChatMessageInput({ showChat, setShowChat }) {
+export default function ChatMessageInput({
+  value,
+  setValue,
+  showChat,
+  setShowChat,
+  onSend,
+}) {
   return (
     <Pressable
       style={{
@@ -22,7 +29,7 @@ export default function ChatMessageInput({ showChat, setShowChat }) {
           <Feather name="x" size={24} color="#4C4C4C" />
         </TouchableOpacity>
       ) : (
-        <Feather name="message-square" size={24} color="#4C4C4C" />
+        <Feather name="search" size={24} color="#4C4C4C" />
       )}
       {showChat ? (
         <TextInput
@@ -30,8 +37,15 @@ export default function ChatMessageInput({ showChat, setShowChat }) {
             fontFamily: "Gilroy-Medium",
             fontSize: 16,
             flexGrow: 1,
+            maxWidth: "80%",
+            maxHeight: 100,
+            bottom: 0,
           }}
-          placeholder="Type a message"
+          placeholder="Type in your symptoms"
+          value={value}
+          onChangeText={setValue}
+          multiline={true}
+          textAlignVertical="bottom"
         />
       ) : (
         <Text
@@ -42,10 +56,12 @@ export default function ChatMessageInput({ showChat, setShowChat }) {
             opacity: 0.5,
           }}
         >
-          How are you feeling today?
+          Find yourself a doctor
         </Text>
       )}
-      <Feather name="mic" size={24} color="#4C4C4C" />
+      {showChat && (
+        <Feather name="send" size={24} color="#4C4C4C" onPress={onSend} />
+      )}
     </Pressable>
   );
 }

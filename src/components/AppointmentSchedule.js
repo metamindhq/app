@@ -42,9 +42,11 @@ function AppointmentSchedule(props) {
           <RefreshControl refreshing={refreshing} onRefresh={refresh} />
         }
       >
-        <AgendaList list={appointments} timeProp="date_time">
-          <AppointmentCard refreshAppointments={reloadData} />
-        </AgendaList>
+        {appointments.length > 0 && (
+          <AgendaList list={appointments} timeProp="date_time">
+            <AppointmentCard refreshAppointments={reloadData} />
+          </AgendaList>
+        )}
         {appointments.length === 0 && !refreshing && (
           <View>
             <Text

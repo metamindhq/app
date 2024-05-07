@@ -18,6 +18,23 @@ export async function getDoctorById(id) {
   return response.data;
 }
 
+export async function getDoctorBySpecialization(specialization) {
+  let config = {
+    method: "get",
+    maxBodyLength: Infinity,
+    url: `${api_base_url}/doctors/specialization/${specialization}`,
+    headers: {
+      accept: "application/json",
+    },
+  };
+
+  const response = await axios.request(config).catch((err) => {
+    console.log("Error: ", err);
+  });
+
+  return response.data;
+}
+
 export async function listDoctors() {
   let config = {
     method: "get",

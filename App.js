@@ -5,10 +5,13 @@ import { useFonts } from "expo-font";
 import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 
-import HomeView from "./src/views/HomeView";
 import NotificationView from "./src/views/NotificationView";
 import CreateAppointmentView from "./src/views/CreateAppointmentView";
 import Toast from "react-native-toast-message";
+import LogInView from "./src/views/AuthView";
+import PatientHomeView from "./src/views/PatientHomeView";
+import DoctorHomeView from "./src/views/DoctorHomeView";
+import PatientDetailsView from "./src/views/PatientDetailsView";
 
 const Stack = createNativeStackNavigator();
 
@@ -33,15 +36,32 @@ function App() {
       <StatusBar barStyle="default" />
       <Stack.Navigator>
         <Stack.Screen
-          name="Home"
-          component={HomeView}
+          name="Login"
+          component={LogInView}
+          options={{
+            headerShown: false,
+          }}
+        />
+        <Stack.Screen
+          name="PatientHome"
+          component={PatientHomeView}
           options={{ headerShown: false }}
+        />
+        <Stack.Screen
+          name="DoctorHome"
+          component={DoctorHomeView}
+          options={{ headerShown: false, headerTitle: "Home" }}
         />
         <Stack.Screen name="Notifications" component={NotificationView} />
         <Stack.Screen
           name="CreateAppointment"
           component={CreateAppointmentView}
           options={{ title: "Create Appointment" }}
+        />
+        <Stack.Screen
+          name="PatientDetails"
+          component={PatientDetailsView}
+          options={{ headerTitle: "Patient details" }}
         />
       </Stack.Navigator>
       <Toast />

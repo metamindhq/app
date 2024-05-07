@@ -14,17 +14,13 @@ export async function getCurrentUser() {
   return currentUser;
 }
 
-export async function setCurrentUser() {
-  const currentUser = await getCurrentUser();
-
-  if (!currentUser) {
-    return;
-  }
+export async function setCurrentUser(username, password, isDoctor) {
+  const endpoint = isDoctor ? "doctors/username" : "patients/username";
 
   let config = {
     method: "get",
     maxBodyLength: Infinity,
-    url: `${api_base_url}/patients/${currentUser.id}`,
+    url: `${api_base_url}/${endpoint}/${username}`,
     headers: {
       accept: "application/json",
     },
@@ -34,10 +30,17 @@ export async function setCurrentUser() {
     console.log("Error: ", err);
   });
 
+  if (response.data.password !== password) {
+    throw new Error("Invalid username or password");
+  }
+
   await storage
     .save({
       key: "currentUser",
-      data: response.data,
+      data: {
+        isDoctor,
+        ...response.data,
+      },
     })
     .catch((err) => {
       console.log("Error: ", err);

@@ -41,7 +41,7 @@ function renderTabBar(props) {
   );
 }
 
-export default function HomeView(props) {
+export default function PatientHomeView(props) {
   const opacityAnim = useRef(new Animated.Value(0)).current;
   const layout = useWindowDimensions();
 
@@ -58,7 +58,7 @@ export default function HomeView(props) {
         return <MedicationSchedule {...props} />;
 
       case "appointmentSchedule":
-        return <AppointmentSchedule {...props} />;
+        return <AppointmentSchedule {...props} setShowChat={setShowChat} />;
 
       default:
         return null;
@@ -82,29 +82,31 @@ export default function HomeView(props) {
       }}
     >
       <HomeHeader {...props} showChat={showChat} setShowChat={setShowChat} />
-      <Animated.View
-        style={{
-          height: "100%",
-          width: "100%",
-          borderTopLeftRadius: 32,
-          borderTopRightRadius: 32,
-          backgroundColor: "#ffffff",
-          marginTop: 18,
-          shadowRadius: 16,
-          shadowColor: "#000000",
-          shadowOpacity: 0.05,
-          opacity: opacityAnim,
-        }}
-      >
-        <TabView
-          lazy
-          navigationState={{ index, routes }}
-          renderScene={renderScene}
-          renderTabBar={renderTabBar}
-          onIndexChange={setIndex}
-          initialLayout={{ width: layout.width }}
-        />
-      </Animated.View>
+      {!showChat && (
+        <Animated.View
+          style={{
+            height: "100%",
+            width: "100%",
+            borderTopLeftRadius: 32,
+            borderTopRightRadius: 32,
+            backgroundColor: "#ffffff",
+            marginTop: 18,
+            shadowRadius: 16,
+            shadowColor: "#000000",
+            shadowOpacity: 0.05,
+            opacity: opacityAnim,
+          }}
+        >
+          <TabView
+            lazy
+            navigationState={{ index, routes }}
+            renderScene={renderScene}
+            renderTabBar={renderTabBar}
+            onIndexChange={setIndex}
+            initialLayout={{ width: layout.width }}
+          />
+        </Animated.View>
+      )}
     </SafeAreaView>
   );
 }

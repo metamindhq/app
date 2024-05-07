@@ -12,8 +12,6 @@ export default function AgendaList(props) {
         new Date(b?.[props.timeProp]).getTime()
     );
 
-    console.log(sortedArray);
-
     const groups = {};
     for (const item of sortedArray) {
       const time = item?.[props.timeProp];

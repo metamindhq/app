@@ -37,9 +37,11 @@ function MedicationSchedule() {
         <RefreshControl refreshing={refreshing} onRefresh={refresh} />
       }
     >
-      <AgendaList list={schedule} timeProp="reminder_timestamp">
-        <MedicineReminderCard />
-      </AgendaList>
+      {schedule.length > 0 && (
+        <AgendaList list={schedule} timeProp="reminder_timestamp">
+          <MedicineReminderCard />
+        </AgendaList>
+      )}
       {schedule.length === 0 && (
         <Text
           style={{

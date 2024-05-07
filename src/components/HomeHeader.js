@@ -6,12 +6,13 @@ import { getCurrentUser } from "../utils/user";
 import { useEffect, useState } from "react";
 
 export default function HomeHeader(props) {
-  const { navigation, showChat, setShowChat } = props;
+  const { navigation } = props;
 
   const [user, setUser] = useState();
 
   useEffect(() => {
     getCurrentUser().then((fetchedUser) => {
+      console.log("fetchedUser", fetchedUser);
       setUser(fetchedUser);
     });
   }, []);
@@ -59,18 +60,24 @@ export default function HomeHeader(props) {
                 fontFamily: "Gilroy-SemiBold",
               }}
             >
-              {user?.name}
+              {user?.isDoctor && "Dr"} {user?.name}
             </Text>
           </View>
         </View>
-        <Feather
+        {/* <Feather
           name="bell"
           size={24}
           color="#4C4C4C"
           onPress={() => navigation.navigate("Notifications")}
+        /> */}
+        <Feather
+          name="log-out"
+          size={24}
+          color="#4C4C4C"
+          onPress={() => navigation.replace("Login")}
         />
       </View>
-      <ChatMessageView {...props} />
+      {!user?.isDoctor && <ChatMessageView {...props} />}
     </View>
   );
 }

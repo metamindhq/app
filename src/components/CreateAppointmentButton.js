@@ -3,7 +3,8 @@ import { Platform, Text, TouchableOpacity, View } from "react-native";
 
 export default function CreateAppointmentButton(props) {
   const openCreateAppointmentView = () => {
-    props.navigation.navigate("CreateAppointment", props);
+    // props.navigation.navigate("CreateAppointment", props);
+    props.setShowChat(true);
   };
   return (
     <TouchableOpacity
